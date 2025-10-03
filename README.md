@@ -5,7 +5,7 @@ womenweb3women
 
 大女人们，🎉🎉恭喜完成7 days in Web3 挑战🎉🎉！度日如年，好在我们坚持下来啦，现在是展示你的想法，发声的时候啦。开始你的改变世界之旅吧。
 
-本次活动由Herstory社区发起，Powered by Web3Compass,sponsored by OneKey & HackQuest, community partnered with OpenBuild, Creat0rs, 706.
+本次活动由Herstory社区主持
 
 ## [代码提交]
 
@@ -30,16 +30,10 @@ womenweb3women
 
 4. 推送最终PR的分支，建议以项目命名， 且只可修改本团队项目目录内容。
 
-5. 请在 `2025年7月6日上午24:00` (北京时区）前，初始化团队项目目录。
+5. 请在 `2025年9月27日上午24:00` (北京时区）前，初始化团队项目目录。
 
-6. 最终PR，在 `2025年7月6日24:00` （北京时区）前提交，且各团队自己发起MR请求。
+6. 最终PR，在 `2025年9月27日24:00` （北京时区）前提交，且各团队自己发起MR请求。
 
 7. [项目参考模块,点我查看详情](https://github.com/0xherstory/womenweb3wave4.5/blob/main/demo-projects-submit-here/00-proj-template/project-intro-includes.md)
 
-## [不通过GitHub提交的方法]
-1. 请直接打包并提交： https://tally.so/r/wQq4ag
-2. 请在 `2025年7月6日上午24:00` (北京时区）前完成提交
-3. 每个队伍提交一份就可以，我们将以最后提交的版本为准
-   
-   
-![demoday](https://github.com/user-attachments/assets/771d8164-320e-407d-81ee-f8078a6bca0a)
+
