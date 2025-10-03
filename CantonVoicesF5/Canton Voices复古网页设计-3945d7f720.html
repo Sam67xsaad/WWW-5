@@ -1,0 +1,736 @@
+<!DOCTYPE html>
+<html lang="zh-HK">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Canton Voices - 粤语文化传播平台</title>
+    <script src="https://cdn.tailwindcss.com/3.3.3"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;700&display=swap');
+        
+        body {
+            font-family: 'Noto Sans TC', sans-serif;
+            background-color: #0a0a1a;
+            color: #e0e0e0;
+            background-image: 
+                radial-gradient(circle at 10% 20%, rgba(138, 43, 226, 0.1) 0%, transparent 20%),
+                radial-gradient(circle at 90% 80%, rgba(255, 0, 255, 0.1) 0%, transparent 20%),
+                url('data:image/svg+xml;utf8,<svg width="100" height="100" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg"><rect width="100" height="100" fill="none" stroke="rgba(0,255,127,0.05)" stroke-width="1"/></svg>');
+            overflow-x: hidden;
+        }
+
+        .neon-text {
+            text-shadow: 0 0 5px #00ff7f, 0 0 10px #00ff7f, 0 0 15px #00ff7f;
+            color: #fff;
+        }
+
+        .neon-text-pink {
+            text-shadow: 0 0 5px #ff69b4, 0 0 10px #ff69b4, 0 0 15px #ff69b4;
+            color: #fff;
+        }
+
+        .neon-text-blue {
+            text-shadow: 0 0 5px #1e90ff, 0 0 10px #1e90ff, 0 0 15px #1e90ff;
+            color: #fff;
+        }
+
+        .vintage-border {
+            border: 2px solid #ff00ff;
+            box-shadow: 0 0 10px #ff00ff, inset 0 0 10px #ff00ff;
+        }
+
+        .tab-container {
+            margin-top: 20px;
+        }
+
+        .nav-tabs {
+            display: flex;
+            gap: 4px;
+            margin-bottom: 20px;
+            overflow-x: auto;
+            padding-bottom: 10px;
+        }
+
+        .nav-tab {
+            padding: 10px 20px;
+            background: #1a1a2e;
+            border: 2px solid #4b0082;
+            border-radius: 8px 8px 0 0;
+            cursor: pointer;
+            white-space: nowrap;
+            transition: all 0.3s ease;
+        }
+
+        .nav-tab.active {
+            background: #0a0a1a;
+            border-bottom: 2px solid #0a0a1a;
+            margin-bottom: -2px;
+        }
+
+        .nav-tab-green.active {
+            box-shadow: 0 0 15px rgba(0, 255, 127, 0.7);
+            border-color: #00ff7f;
+        }
+
+        .nav-tab-pink.active {
+            box-shadow: 0 0 15px rgba(255, 105, 180, 0.7);
+            border-color: #ff69b4;
+        }
+
+        .nav-tab-blue.active {
+            box-shadow: 0 0 15px rgba(30, 144, 255, 0.7);
+            border-color: #1e90ff;
+        }
+
+        .tab-pane {
+            display: none;
+            animation: fadeIn 0.5s ease-out;
+        }
+
+        .tab-pane.active {
+            display: block;
+        }
+
+        .newspaper-bg {
+            background-image: url('data:image/svg+xml;utf8,<svg width="200" height="200" viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg"><filter id="noise"><feTurbulence type="fractalNoise" baseFrequency="0.65" numOctaves="3" stitchTiles="stitch"/><feColorMatrix type="matrix" values="1 0 0 0 0 0 1 0 0 0 0 0 1 0 0 0 0 0 0.05 0"/></filter><rect width="100%" height="100%" filter="url(%23noise)" fill="none"/></svg>');
+            background-color: #1a1a1a;
+            padding: 20px;
+            border-radius: 4px;
+        }
+
+        .tv-transition {
+            position: relative;
+            overflow: hidden;
+        }
+
+        .tv-transition::after {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(
+                to bottom,
+                transparent 0%,
+                rgba(0, 0, 0, 0.8) 50%,
+                transparent 100%
+            );
+            background-size: 100% 4px;
+            animation: scanline 0.5s linear;
+            pointer-events: none;
+        }
+
+        @keyframes scanline {
+            0% { transform: translateY(-100%); }
+            100% { transform: translateY(100%); }
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; filter: blur(5px); }
+            to { opacity: 1; filter: blur(0); }
+        }
+
+        .tape-player {
+            background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
+            border-radius: 8px;
+            border: 2px solid #4b0082;
+            box-shadow: 0 0 15px rgba(75, 0, 130, 0.5);
+        }
+
+        .arcade-button {
+            background: linear-gradient(135deg, #ff00ff 0%, #9400d3 100%);
+            border: none;
+            border-radius: 50%;
+            box-shadow: 0 0 10px #ff00ff, inset 0 0 5px #ffffff;
+            transition: all 0.3s ease;
+        }
+
+        .arcade-button:hover {
+            transform: scale(1.05);
+            box-shadow: 0 0 15px #ff00ff, inset 0 0 8px #ffffff;
+        }
+
+        .crt-effect::after {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(rgba(18, 16, 16, 0) 50%, rgba(0, 0, 0, 0.25) 50%);
+            background-size: 100% 4px;
+            pointer-events: none;
+            z-index: 10;
+        }
+
+        .loading-screen {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: #000;
+            z-index: 9999;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            animation: fadeOut 1s ease 1.5s forwards;
+        }
+
+        .tv-noise {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url('data:image/svg+xml;utf8,<svg viewBox="0 0 250 250" xmlns="http://www.w3.org/2000/svg"><filter id="noise"><feTurbulence type="fractalNoise" baseFrequency="5" numOctaves="3" stitchTiles="stitch"/><feColorMatrix type="matrix" values="1 0 0 0 0 0 1 0 0 0 0 0 1 0 0 0 0 0 0.05 0"/></filter><rect width="100%" height="100%" filter="url(%23noise)" fill="none"/></svg>');
+            opacity: 0.7;
+        }
+
+        @keyframes fadeOut {
+            to { opacity: 0; visibility: hidden; }
+        }
+
+        .nft-card {
+            background: linear-gradient(145deg, #1e1e3f 0%, #2a0b42 100%);
+            border: 1px solid #4b0082;
+            transition: all 0.3s ease;
+            overflow: hidden;
+            cursor: pointer;
+        }
+
+        .nft-card img {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+            transition: transform 0.3s ease;
+        }
+
+        .nft-card:hover img {
+            transform: scale(1.05);
+        }
+
+        .nft-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(75, 0, 130, 0.5);
+        }
+
+        .game-option {
+            border: 2px solid #00ff7f;
+            transition: all 0.3s ease;
+        }
+
+        .game-option:hover {
+            transform: scale(1.05);
+            box-shadow: 0 0 15px rgba(0, 255, 127, 0.5);
+        }
+
+        .game-option.selected {
+            border: 3px solid #ff00ff;
+            box-shadow: 0 0 20px rgba(255, 0, 255, 0.7);
+        }
+
+        .question-section {
+            margin-bottom: 20px;
+            padding-bottom: 20px;
+            border-bottom: 1px solid #4b0082;
+        }
+
+        .question-section:last-child {
+            border-bottom: none;
+        }
+
+        .hidden {
+            display: none !important;
+        }
+
+        .game-status {
+            background: rgba(26, 26, 46, 0.7);
+            padding: 10px 20px;
+            border-radius: 8px;
+            border: 1px solid #4b0082;
+        }
+
+        #nft-modal {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0, 0, 0, 0.8);
+            z-index: 9999;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+        }
+
+        #modal-content {
+            max-width: 90%;
+            max-height: 90vh;
+            position: relative;
+            overflow: auto;
+        }
+
+        #modal-image {
+            max-width: 100%;
+            max-height: 70vh;
+            object-fit: contain;
+            margin: 0 auto;
+            display: block;
+        }
+
+        #close-modal {
+            position: absolute;
+            top: -40px;
+            right: 0;
+            color: white;
+            font-size: 24px;
+            cursor: pointer;
+            background: #4b0082;
+            width: 36px;
+            height: 36px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border: 2px solid #ff00ff;
+            box-shadow: 0 0 10px #ff00ff;
+        }
+
+        .result-page {
+            text-align: center;
+            padding: 40px 20px;
+            background: radial-gradient(circle, rgba(26,26,46,0.9) 0%, rgba(10,10,26,0.9) 100%);
+            border-radius: 12px;
+            border: 2px solid #00ff7f;
+            box-shadow: 0 0 20px rgba(0, 255, 127, 0.5);
+        }
+
+        @media (max-width: 768px) {
+            .nav-tabs {
+                justify-content: flex-start;
+            }
+            
+            .modal-body {
+                padding: 10px;
+            }
+        }
+    </style>
+</head>
+<body class="crt-effect">
+    <!-- 加载动画 -->
+    <div class="loading-screen">
+        <div class="tv-noise"></div>
+        <div class="text-white text-2xl font-bold neon-text">加载中...</div>
+    </div>
+
+    <!-- NFT查看模态框 -->
+    <div id="nft-modal" class="hidden">
+        <div id="modal-content" class="vintage-border p-2 bg-black max-w-4xl w-full">
+            <button id="close-modal" class="absolute -top-10 right-0">
+                <i class="fas fa-times text-white text-2xl"></i>
+            </button>
+            <div class="modal-body">
+                <img id="modal-image" src="" alt="NFT完整图">
+                <div class="mt-4 text-center">
+                    <h3 id="modal-title" class="text-xl neon-text-blue mb-2"></h3>
+                    <p id="modal-description" class="text-gray-300"></p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- 导航栏 -->
+    <nav class="bg-black bg-opacity-80 backdrop-filter backdrop-blur-lg sticky top-0 z-50 p-4 border-b-2 border-purple-600">
+        <div class="container mx-auto flex justify-between items-center">
+            <div class="flex items-center">
+                <div class="w-10 h-10 bg-purple-600 rounded-full flex items-center justify-center mr-3">
+                    <i class="fas fa-microphone-alt text-white"></i>
+                </div>
+                <h1 class="text-2xl font-bold neon-text">Canton Voices</h1>
+            </div>
+            
+            <button class="md:hidden text-white focus:outline-none" id="menuButton">
+                <i class="fas fa-bars text-2xl"></i>
+            </button>
+        </div>
+    </nav>
+
+    <!-- 主要内容 -->
+    <main class="container mx-auto px-4 py-8">
+        <!-- 书签页导航 -->
+        <div class="tab-container">
+            <div class="nav-tabs">
+                <div class="nav-tab nav-tab-green active" data-tab="tab-daily">
+                    <span class="neon-text">女人嘅嘢，自己话事</span>
+                </div>
+                <div class="nav-tab nav-tab-pink" data-tab="tab-game">
+                    <span class="neon-text-pink">看图选题游戏</span>
+                </div>
+                <div class="nav-tab nav-tab-blue" data-tab="tab-nft">
+                    <span class="neon-text-blue">我的NFT收藏</span>
+                </div>
+            </div>
+
+            <!-- 今日俗语标签页 -->
+            <div id="tab-daily" class="tab-pane active vintage-border p-6 bg-black bg-opacity-70 rounded-lg">
+                <div class="flex items-start">
+                    <div class="tape-player p-4 mr-6 flex-shrink-0">
+                        <div class="flex justify-center mb-4">
+                            <div class="w-16 h-16 rounded-full bg-gray-700 flex items-center justify-center">
+                                <i class="fas fa-play text-green-400 text-2xl"></i>
+                            </div>
+                        </div>
+                        <div class="flex justify-between">
+                            <button class="arcade-button w-10 h-10 text-white">
+                                <i class="fas fa-backward"></i>
+                            </button>
+                            <button class="arcade-button w-10 h-10 text-white">
+                                <i class="fas fa-forward"></i>
+                            </button>
+                        </div>
+                    </div>
+                    
+                    <div>
+                        <h3 class="text-2xl font-bold text-green-400 mb-2">"女人嘅嘢，自己话事"</h3>
+                        
+                        <div class="newspaper-bg p-4 mb-4">
+                            <h4 class="text-xl font-bold text-yellow-400 mb-2">释义</h4>
+                            <p class="text-gray-300 mb-4">女性的事情由自己做主，强调女性拥有独立自主的权利和自主选择的能力，不受传统性别角色束缚。</p>
+                            
+                            <h4 class="text-xl font-bold text-yellow-400 mb-2">文化背景</h4>
+                            <p class="text-gray-300">这句话诞生于1980年代香港女性主义运动兴起时期，反映了当时女性争取社会地位和自主权利的思潮。在港剧《狂潮》《家变》等作品中，独立女性角色常以类似台词表达自主意识，成为粤语流行文化中女性赋权的标志性语句。它挑战了传统性别角色期待，鼓励女性掌控自身命运，至今仍是香港女权话语的重要符号。</p>
+                        </div>
+                        
+                        <div class="flex flex-wrap gap-2">
+                            <span class="px-3 py-1 bg-purple-900 rounded-full text-sm">女性主义</span>
+                            <span class="px-3 py-1 bg-purple-900 rounded-full text-sm">独立自主</span>
+                            <span class="px-3 py-1 bg-purple-900 rounded-full text-sm">粤语文化</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 看图选题游戏标签页 -->
+            <div id="tab-game" class="tab-pane vintage-border p-6 bg-black bg-opacity-70 rounded-lg">
+                <!-- 游戏状态显示 -->
+                <div class="game-status mb-6 flex justify-between items-center">
+                    <div class="text-lg neon-text-pink">当前分数: <span id="score">0</span></div>
+                    <div class="text-lg neon-text-pink">关卡进度: <span id="current-level">1</span>/3</div>
+                </div>
+                
+                <!-- 题目容器 -->
+                <div id="question-container">
+                    <!-- 第一题 -->
+                    <div class="question-section" data-level="1">
+                        <h3 class="text-xl font-bold text-pink-400 mb-4">第一题：我好肚餓呀！我應該做乜嘢？</h3>
+                        
+                        <div class="grid grid-cols-3 gap-4">
+                            <div class="game-option p-2 rounded-lg cursor-pointer">
+                                <img src="https://s.coze.cn/t/Dxx8FcdRxh0/" alt="食飯" class="w-full h-auto rounded">
+                                <p class="text-center mt-2">食飯</p>
+                            </div>
+                            <div class="game-option p-2 rounded-lg cursor-pointer">
+                                <img src="https://s.coze.cn/t/AW5VI21ethU/" alt="瞓覺" class="w-full h-auto rounded">
+                                <p class="text-center mt-2">瞓覺</p>
+                            </div>
+                            <div class="game-option p-2 rounded-lg cursor-pointer">
+                                <img src="https://s.coze.cn/t/Ww-IA83iop0/" alt="打波" class="w-full h-auto rounded">
+                                <p class="text-center mt-2">打波</p>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- 第二题 -->
+                    <div class="question-section hidden" data-level="2">
+                        <h3 class="text-xl font-bold text-pink-400 mb-4">第二题：出面落大雨啦！我應該做乜嘢？</h3>
+                        
+                        <div class="grid grid-cols-3 gap-4">
+                            <div class="game-option p-2 rounded-lg cursor-pointer">
+                                <img src="https://s.coze.cn/t/f-_CeAk-t1M/" alt="撑雨遮" class="w-full h-auto rounded">
+                                <p class="text-center mt-2">撑雨遮</p>
+                            </div>
+                            <div class="game-option p-2 rounded-lg cursor-pointer">
+                                <img src="https://s.coze.cn/t/IBh9o9qe7EU/" alt="食雪糕" class="w-full h-auto rounded">
+                                <p class="text-center mt-2">食雪糕</p>
+                            </div>
+                            <div class="game-option p-2 rounded-lg cursor-pointer">
+                                <img src="https://s.coze.cn/t/_tDfwPoiy00/" alt="去游水" class="w-full h-auto rounded">
+                                <p class="text-center mt-2">去游水</p>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- 第三题 -->
+                    <div class="question-section hidden" data-level="3">
+                        <h3 class="text-xl font-bold text-pink-400 mb-4">第三题：我今日好攰啊！我应该做乜嘢？</h3>
+                        
+                        <div class="grid grid-cols-3 gap-4">
+                            <div class="game-option p-2 rounded-lg cursor-pointer">
+                                <img src="https://s.coze.cn/t/zUieFt-GGRE/" alt="睡觉" class="w-full h-auto rounded">
+                                <p class="text-center mt-2">睡觉</p>
+                            </div>
+                            <div class="game-option p-2 rounded-lg cursor-pointer">
+                                <img src="https://s.coze.cn/t/s4XN050A-3A/" alt="吃饭" class="w-full h-auto rounded">
+                                <p class="text-center mt-2">吃饭</p>
+                            </div>
+                            <div class="game-option p-2 rounded-lg cursor-pointer">
+                                <img src="https://s.coze.cn/t/cYxgwBJetwc/" alt="跑步" class="w-full h-auto rounded">
+                                <p class="text-center mt-2">跑步</p>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- 结果页面 -->
+                    <div id="result-page" class="hidden text-center p-6">
+                        <h2 class="text-2xl neon-text mb-4">闯关完成！</h2>
+                        <p class="text-xl mb-6">你的最终得分: <span id="final-score">0</span></p>
+                        <div class="flex flex-col sm:flex-row justify-center gap-4">
+                            <button id="restart-game" class="bg-purple-600 hover:bg-purple-700 text-white font-bold py-2 px-6 rounded-full transition-colors">
+                                再来一次
+                            </button>
+                            <button id="return-home" class="bg-blue-600 hover:bg-blue-700 text-white font-bold py-2 px-6 rounded-full transition-colors">
+                                返回首页
+                            </button>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- 下一题按钮 -->
+                <div class="mt-6 flex justify-center">
+                    <button id="next-button" class="bg-green-500 hover:bg-green-600 text-white font-bold py-2 px-6 rounded-full transition-colors">
+                        下一题
+                    </button>
+                </div>
+            </div>
+
+            <!-- NFT收藏标签页 -->
+            <div id="tab-nft" class="tab-pane vintage-border p-6 bg-black bg-opacity-70 rounded-lg">
+                <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+                    <!-- NFT 1: 沟通困境 -->
+                    <div class="nft-card p-4 rounded-lg" data-title="沟通困境" data-description="金句：真系同你communicate唔到<br>收集日期: 2025-09-27" data-image="https://space.coze.cn/s/3QLstgHNgZw/?width_height=1179x1058">
+                        <img src="https://space.coze.cn/s/3QLstgHNgZw/?width_height=1179x1058" alt="沟通困境" class="w-full h-auto rounded-lg mb-3">
+                        <h3 class="text-xl font-bold text-blue-400">沟通困境</h3>
+                        <p class="text-gray-400 text-sm mb-2">金句：真系同你communicate唔到<br>收集日期: 2025-09-27</p>
+                        <div class="flex justify-between items-center">
+                            <span class="text-yellow-400">稀有度: ★★★</span>
+                            <button class="text-purple-400 hover:text-purple-300">
+                                <i class="fas fa-share-alt"></i>
+                            </button>
+                        </div>
+                    </div>
+                    
+                    <!-- NFT 2: 世间无最贱 -->
+                    <div class="nft-card p-4 rounded-lg" data-title="世间无最贱" data-description="金句：原来这个世界是没有最贱<br>收集日期: 2025-09-27" data-image="https://space.coze.cn/s/37DWzEgbVJg/?width_height=1179x1437">
+                        <img src="https://space.coze.cn/s/37DWzEgbVJg/?width_height=1179x1437" alt="世间无最贱" class="w-full h-auto rounded-lg mb-3">
+                        <h3 class="text-xl font-bold text-blue-400">世间无最贱</h3>
+                        <p class="text-gray-400 text-sm mb-2">金句：原来这个世界是没有最贱<br>收集日期: 2025-09-27</p>
+                        <div class="flex justify-between items-center">
+                            <span class="text-yellow-400">稀有度: ★★</span>
+                            <button class="text-purple-400 hover:text-purple-300">
+                                <i class="fas fa-share-alt"></i>
+                            </button>
+                        </div>
+                    </div>
+                    
+                    <!-- NFT 3: 三十而死 -->
+                    <div class="nft-card p-4 rounded-lg" data-title="三十而死" data-description="金句：三十而死<br>收集日期: 2025-09-27" data-image="https://space.coze.cn/s/4hVXnk4Iju8/?width_height=1179x1532">
+                        <img src="https://space.coze.cn/s/4hVXnk4Iju8/?width_height=1179x1532" alt="三十而死" class="w-full h-auto rounded-lg mb-3">
+                        <h3 class="text-xl font-bold text-blue-400">三十而死</h3>
+                        <p class="text-gray-400 text-sm mb-2">金句：三十而死<br>收集日期: 2025-09-27</p>
+                        <div class="flex justify-between items-center">
+                            <span class="text-yellow-400">稀有度: ★★★★</span>
+                            <button class="text-purple-400 hover:text-purple-300">
+                                <i class="fas fa-share-alt"></i>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- 页脚 -->
+    <footer class="bg-black bg-opacity-80 py-6 mt-12 border-t-2 border-purple-600">
+        <div class="container mx-auto px-4 text-center">
+            <div class="flex flex-col md:flex-row justify-center items-center space-y-2 md:space-y-0 md:space-x-6 mb-4">
+                <a href="#" class="text-gray-400 hover:text-green-400 transition-colors">关于我们</a>
+                <a href="#" class="text-gray-400 hover:text-green-400 transition-colors">隐私政策</a>
+                <a href="#" class="text-gray-400 hover:text-green-400 transition-colors">使用条款</a>
+                <a href="#" class="text-gray-400 hover:text-green-400 transition-colors">联系我们</a>
+            </div>
+            <p class="text-gray-500 text-sm">© 2025 Canton Voices. 保留所有权利。</p>
+            <p class="text-gray-500 text-sm mt-2">created by <a href="https://space.coze.cn" class="text-purple-400 hover:text-purple-300">coze space</a></p>
+            <p class="text-gray-500 text-sm">页面内容均由 AI 生成，仅供参考</p>
+        </div>
+    </footer>
+
+    <script>
+        // 等待DOM加载完成
+        document.addEventListener('DOMContentLoaded', function() {
+            // 模拟加载完成
+            setTimeout(() => {
+                document.querySelector('.loading-screen').style.display = 'none';
+            }, 1500);
+
+            // 标签页切换功能
+            document.querySelectorAll('.nav-tab').forEach(tab => {
+                tab.addEventListener('click', function() {
+                    // 移除所有激活状态
+                    document.querySelectorAll('.nav-tab').forEach(t => t.classList.remove('active'));
+                    document.querySelectorAll('.tab-pane').forEach(p => {
+                        p.classList.remove('active');
+                        p.classList.add('tv-transition');
+                        setTimeout(() => {
+                            p.classList.remove('tv-transition');
+                        }, 500);
+                    });
+                    
+                    // 激活当前标签
+                    this.classList.add('active');
+                    const target = this.getAttribute('data-tab');
+                    document.getElementById(target).classList.add('active');
+                });
+            });
+
+            // 游戏闯关功能
+            let currentLevel = 1;
+            let score = 0;
+            const totalLevels = 3;
+            
+            // 初始化游戏
+            function initGame() {
+                currentLevel = 1;
+                score = 0;
+                document.getElementById('score').textContent = '0';
+                document.getElementById('current-level').textContent = '1';
+                
+                // 显示第一题，隐藏其他
+                document.querySelectorAll('.question-section').forEach(section => {
+                    section.classList.add('hidden');
+                });
+                document.querySelector(`.question-section[data-level="1"]`).classList.remove('hidden');
+                
+                // 隐藏结果页，显示下一题按钮
+                document.getElementById('result-page').classList.add('hidden');
+                document.getElementById('question-container').classList.remove('hidden');
+                document.getElementById('next-button').classList.remove('hidden');
+                updateButtonText();
+            }
+            
+            // 更新按钮文本
+            function updateButtonText() {
+                const button = document.getElementById('next-button');
+                if (currentLevel < totalLevels) {
+                    button.textContent = '下一题';
+                } else {
+                    button.textContent = '查看结果';
+                }
+            }
+            
+            // 验证答案并进入下一关
+            function nextLevel() {
+                // 获取当前题目的选中选项
+                const currentQuestion = document.querySelector(`.question-section[data-level="${currentLevel}"]`);
+                const selectedOption = currentQuestion.querySelector('.game-option.selected');
+                
+                if (!selectedOption) {
+                    alert('请选择一个答案！');
+                    return;
+                }
+                
+                // 判断答案是否正确（第一题正确答案是第一个选项）
+                const isCorrect = selectedOption === currentQuestion.querySelectorAll('.game-option')[0];
+                
+                // 正确答案加分
+                if (isCorrect) {
+                    score += 10;
+                    document.getElementById('score').textContent = score;
+                }
+                
+                // 进入下一关或显示结果
+                currentLevel++;
+                if (currentLevel <= totalLevels) {
+                    // 显示下一题
+                    document.querySelectorAll('.question-section').forEach(section => {
+                        section.classList.add('hidden');
+                    });
+                    document.querySelector(`.question-section[data-level="${currentLevel}"]`).classList.remove('hidden');
+                    document.getElementById('current-level').textContent = currentLevel;
+                    updateButtonText();
+                } else {
+                    // 显示结果页
+                    document.getElementById('question-container').classList.add('hidden');
+                    document.getElementById('result-page').classList.remove('hidden');
+                    document.getElementById('final-score').textContent = score;
+                }
+            }
+            
+            // 游戏选项选择效果
+            const gameOptions = document.querySelectorAll('.game-option');
+            gameOptions.forEach(option => {
+                option.addEventListener('click', function() {
+                    // 只在当前题目内取消选中状态
+                    const currentQuestion = this.closest('.question-section');
+                    currentQuestion.querySelectorAll('.game-option').forEach(opt => opt.classList.remove('selected'));
+                    this.classList.add('selected');
+                });
+            });
+            
+            // NFT模态框功能
+            const nftModal = document.getElementById('nft-modal');
+            const modalImage = document.getElementById('modal-image');
+            const modalTitle = document.getElementById('modal-title');
+            const modalDescription = document.getElementById('modal-description');
+            
+            // NFT卡片点击事件
+            document.querySelectorAll('.nft-card').forEach(card => {
+                card.addEventListener('click', function() {
+                    modalImage.src = this.getAttribute('data-image');
+                    modalTitle.textContent = this.getAttribute('data-title');
+                    modalDescription.innerHTML = this.getAttribute('data-description');
+                    nftModal.classList.remove('hidden');
+                    document.body.style.overflow = 'hidden'; // 防止背景滚动
+                });
+            });
+            
+            // 关闭模态框
+            document.getElementById('close-modal').addEventListener('click', function() {
+                nftModal.classList.add('hidden');
+                document.body.style.overflow = 'auto'; // 恢复滚动
+            });
+            
+            // 点击模态框外部关闭
+            nftModal.addEventListener('click', function(e) {
+                if (e.target === nftModal) {
+                    nftModal.classList.add('hidden');
+                    document.body.style.overflow = 'auto';
+                }
+            });
+            
+            // 返回首页按钮事件
+            document.getElementById('return-home').addEventListener('click', function() {
+                // 切换到"女人嘅嘢，自己话事"标签页
+                document.querySelectorAll('.nav-tab').forEach(tab => {
+                    if (tab.getAttribute('data-tab') === 'tab-daily') {
+                        tab.click(); // 触发标签页点击事件
+                    }
+                });
+                
+                // 重置游戏状态
+                initGame();
+            });
+            
+            // 绑定按钮事件
+            document.getElementById('next-button').addEventListener('click', nextLevel);
+            document.getElementById('restart-game').addEventListener('click', initGame);
+            
+            // 初始化游戏
+            initGame();
+        });
+    </script>
+</body>
+</html>

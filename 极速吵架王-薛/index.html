@@ -1,0 +1,103 @@
+﻿<!DOCTYPE html>
+<html lang="zh-Hans">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>极速吵架王</title>
+    <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+    <main class="app-shell">
+        <header class="hero">
+            <div class="auth-bar" aria-live="polite">
+                <span id="auth-greeting">欢迎你，游客</span>
+                <div class="auth-meta">
+                    <span id="points-display">当前积分：0</span>
+                </div>
+                <div class="auth-actions">
+                    <button id="login-trigger" type="button">登录</button>
+                    <button id="register-trigger" type="button">注册</button>
+                    <button id="logout-btn" type="button" class="hidden">退出</button>
+                </div>
+            </div>
+            <h1>极速吵架王</h1>
+            <p class="lead">吵架的要义在于语速和气势。——鲁迅</p>
+        </header>
+        <section class="content" aria-live="polite">
+            <div class="interaction" role="region" aria-label="示例语音">
+                <button id="sample-play" type="button" disabled>暂无示例语音</button>
+                <div class="sample-info">
+                    <p id="sample-status" class="status">完成任意模块录音后，这里会播放综合评分最高的示例语音。</p>
+                    <p class="sample-meta">来源模块：<span id="sample-module">--</span></p>
+                    <p class="sample-meta">综合得分：<span id="sample-score">--</span></p>
+                    <p class="sample-meta">语音时长：<span id="sample-duration">--</span></p>
+                </div>
+                <audio id="sample-audio" class="hidden" preload="auto"></audio>
+            </div>
+        </section>
+        <section class="modules" aria-labelledby="module-title">
+            <div class="modules-header">
+                <div>
+                    <h2 id="module-title">白天吵不赢，晚上多练习</h2>
+                    <p class="modules-lead">点击下方模块，解锁更高阶的吵架理论，练就压轴气势。</p>
+                </div>
+                <button id="module-create-trigger" type="button" class="secondary" disabled>添加模块（需10积分）</button>
+            </div>
+            <div id="module-grid" class="module-grid" aria-live="polite"></div>
+        </section>
+    </main>
+    <div id="module-overlay" class="module-overlay hidden" role="dialog" aria-modal="true" aria-labelledby="module-heading">
+        <div class="module-content">
+            <button id="module-close" class="module-close" type="button" aria-label="关闭模块">×</button>
+            <h3 id="module-heading"></h3>
+            <div id="module-body" class="module-body"></div>
+            <section class="module-tool" aria-live="polite">
+                <h4 class="module-tool-title">模块练习</h4>
+                <p id="module-status" class="status">点击开始录音，测测你的模块造势。</p>
+                <button id="module-record-toggle" type="button" aria-pressed="false">开始录音</button>
+                <p class="duration">时长：<span id="module-duration">0.0秒</span></p>
+                <audio id="module-audio" class="hidden" controls></audio>
+                <p class="module-score">综合得分：<span id="module-score-value">--</span></p>
+            </section>
+        </div>
+    </div>
+    <div id="auth-overlay" class="module-overlay hidden" role="dialog" aria-modal="true" aria-labelledby="auth-heading">
+        <div class="module-content auth-content">
+            <button id="auth-close" class="module-close" type="button" aria-label="关闭认证窗口">×</button>
+            <h3 id="auth-heading">用户登录</h3>
+            <form id="auth-form" class="auth-form" autocomplete="off">
+                <label class="auth-field">
+                    <span>用户名</span>
+                    <input id="auth-username" name="username" type="text" required minlength="3" maxlength="20" />
+                </label>
+                <label class="auth-field">
+                    <span>密码</span>
+                    <input id="auth-password" name="password" type="password" required minlength="6" maxlength="32" />
+                </label>
+                <p id="auth-message" class="auth-message" aria-live="polite"></p>
+                <button id="auth-submit" type="submit">登录</button>
+            </form>
+            <p class="auth-switch" id="auth-switch"></p>
+        </div>
+    </div>
+    <div id="module-create-overlay" class="module-overlay hidden" role="dialog" aria-modal="true" aria-labelledby="module-create-heading">
+        <div class="module-content create-content">
+            <button id="module-create-close" class="module-close" type="button" aria-label="关闭模块创建窗口">×</button>
+            <h3 id="module-create-heading">自定义模块</h3>
+            <form id="module-create-form" class="create-form">
+                <label class="auth-field">
+                    <span>模块标题</span>
+                    <input id="module-create-title" name="title" type="text" required minlength="3" maxlength="40" />
+                </label>
+                <label class="auth-field">
+                    <span>模块内容</span>
+                    <textarea id="module-create-body" name="body" rows="8" required></textarea>
+                </label>
+                <p id="module-create-message" class="auth-message" aria-live="polite"></p>
+                <button id="module-create-submit" type="submit">添加模块（消耗10积分）</button>
+            </form>
+        </div>
+    </div>
+    <script src="app.js"></script>
+</body>
+</html>
